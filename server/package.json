@@ -5,14 +5,14 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "dev": "npx nodemon Server.js"  
   },
   "keywords": [
     "RestAPI",
     "Express",
     "MongoDB",
-    "Mongoose"
-  ],
+    "Mongoose"              
+  ],  
   "author": "",
   "license": "ISC",
   "dependencies": {
