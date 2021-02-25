@@ -1,7 +1,9 @@
-import express from 'express'
+import express, { application } from 'express'
 import helmet from 'helmet'
-import mongoose from 'mongoose'
 import morgan from 'morgan'
+import Configurations from './configurations/Configurations.js'
+import Middlewares from './src/middlewares/Middlewares.js'
+ 
 
 const app = express()
 app.use(helmet())
@@ -14,11 +16,6 @@ const checkIfAdmin = (request, response, next) => {
 
 app.use(checkIfAdmin)
 
-app.listen(3001, () => {
-    console.log('Servern är igång på port' + 3001)
-
-
-})
 
 
 app.get('/recipe', (request, response) => {
@@ -31,9 +28,15 @@ app.get('/throwdice', checkIfAdmin, (request, response) => {
 
 })
 
-mongoose.connect('mongodb://localhost/namndb', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Successfully connected to the database'))
-    .catch((error) => {
-        console.log('ERROR WHILE TRYING TO CONNECT TO THE DATABASE: ' + error)
-        process.exit()
-    })
+
+app.use(Middlewares.notFound)
+app.use(Middlewares.errorHandler)
+
+Configurations.connectToDatabase()
+Configurations.connectToPort(app)
+
+
+
+
+
+    
