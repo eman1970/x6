@@ -3,6 +3,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import Configurations from './configurations/Configurations.js'
 import Middlewares from './src/middlewares/Middlewares.js'
+/* import mongoose from 'mongoose' */
  
 
 const app = express()
