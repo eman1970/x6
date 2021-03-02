@@ -3,10 +3,13 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import Configurations from './configurations/Configurations.js'
 import Middlewares from './src/middlewares/Middlewares.js'
-/* import mongoose from 'mongoose' */
+import UserRoutes from './src/routes/User.route.js'
  
+/* import mongoose from 'mongoose' */
+
 
 const app = express()
+app.use(express.json())
 app.use(helmet())
 app.use(morgan('common'))
 
@@ -30,6 +33,7 @@ app.get('/throwdice', checkIfAdmin, (request, response) => {
 })
 
 
+UserRoutes.routes(app)
 app.use(Middlewares.notFound)
 app.use(Middlewares.errorHandler)
 
@@ -40,4 +44,4 @@ Configurations.connectToPort(app)
 
 
 
-    
+
