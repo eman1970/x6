@@ -3,7 +3,7 @@ import UserModel from '../models/User.model.js'
 const createUser = async (request, response) => {
 
     const user = new UserModel({
-        userName: request.body.userName,
+        userName: request.body.username,
         password: request.body.password,
         age: request.body.age
 
