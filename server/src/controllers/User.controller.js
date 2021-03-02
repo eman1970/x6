@@ -20,12 +20,23 @@ const createUser = async (request, response) => {
             message: 'Error while trying to create user',
             stack: error
         })
-            
-            
+
+
     }
 
 }
 
+const getAllUsers = async (request, response) => {
+    try {
+        const databaseResponse = await UserModel.find()
+        response.status(200).send(databaseResponse)
+    } catch (error) {
+        response.status(500).send({ message: error.message })
+
+    }
+}
+
 export default {
-    createUser
+    createUser,
+    getAllUsers
 }
