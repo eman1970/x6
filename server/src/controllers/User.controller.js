@@ -82,6 +82,7 @@ const updateUser = async (request, response) => {
 
 }
 
+
 const queryUsername = async (request, response) => {
     try {
         const databaseResponse = await UserModel.find({ userName: request.query.username })
@@ -95,10 +96,24 @@ const queryUsername = async (request, response) => {
     }
 
 }
+
+const getUserByID = async (request, response) => {
+    try {
+        const databaseResponse = await UserModel.findOne({ _id: request.params.userId })
+        response.status(200).send(databaseResponse)
+    } catch (error) {
+        response.status(500).send({
+            message: `Error occured while trying to retrieve user with the ID: ${request.params.userId}`,
+            error: error.message
+        })
+    }
+
+}
 export default {
     createUser,
     getAllUsers,
     deleteUser,
     updateUser,
-    queryUsername
+    queryUsername,
+    getUserByID
 }
