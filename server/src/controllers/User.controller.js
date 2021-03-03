@@ -70,7 +70,7 @@ const updateUser = async (request, response) => {
     }
     try {
         const databaseResponse = await UserModel.findByIdAndUpdate(userId, data, { new: true })
-        response.status(200).send(databaseResponse)
+        response.status(200).send({ message:'Successfully updated user by ID', data: databaseResponse})
     } catch (error) {
         response.status(500).send({
             message: `Error while trying to update user with ID ${userId}`,
@@ -100,7 +100,7 @@ const queryUsername = async (request, response) => {
 const getUserByID = async (request, response) => {
     try {
         const databaseResponse = await UserModel.findById({ _id: request.query.id })
-        response.status(200).send(databaseResponse)
+        response.status(200).send({ message:'Successfully found user by ID', data: databaseResponse})
     } catch (error) {
         response.status(500).send({
             message: `Error occured while trying to retrieve user with the ID: ${request.params.userId}`,
