@@ -69,7 +69,7 @@ const updateUser = async (request, response) => {
         password: request.body.password
     }
     try {
-        const databaseResponse = await UserModel.findByIdAndUpdate(userId, data)
+        const databaseResponse = await UserModel.findByIdAndUpdate(userId, data, {new: true})
         response.status(200).send(databaseResponse)
     } catch (error) {
         response.status(500).send({
