@@ -50,20 +50,41 @@ const getAllUsers = async (request, response) => {
 } */
 
 const deleteUser = async (request, response) => {
-try {
-    const userId = request.params.userId
-    const databaseResponse = await UserModel.findByIdAndDelete(userId)
-    response.status(200).send({ message: 'Successfully deleted user', data: databaseResponse})
-} catch (error){
-    response.status(500).send({
-        message: `Error while trying to delete user with ID ${userId}`,
-        error: error.message
-    })
+    try {
+        const userId = request.params.userId
+        const databaseResponse = await UserModel.findByIdAndDelete(userId)
+        response.status(200).send({ message: 'Successfully deleted user', data: databaseResponse })
+    } catch (error) {
+        response.status(500).send({
+            message: `Error while trying to delete user with ID ${userId}`,
+            error: error.message
+        })
+    }
 }
+
+const updateUser = async (request, response) => {
+    const userId = request.params.userId
+    const data = {
+        userName: request.body.username,
+        password: request.body.password
+    }
+    try {
+        const databaseResponse = await UserModel.findByIdAndUpdate(userId, data)
+        response.status(200).send(databaseResponse)
+    } catch (error) {
+        response.status(500).send({
+            message: `Error while trying to update user with ID ${userId}`,
+            error: error.message
+        })
+
+    }
+
+
 }
 
 export default {
     createUser,
     getAllUsers,
-    deleteUser
+    deleteUser,
+    updateUser
 }
