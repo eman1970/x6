@@ -99,7 +99,7 @@ const queryUsername = async (request, response) => {
 
 const getUserByID = async (request, response) => {
     try {
-        const databaseResponse = await UserModel.findOne({ _id: request.query.id })
+        const databaseResponse = await UserModel.findById({ _id: request.query.id })
         response.status(200).send(databaseResponse)
     } catch (error) {
         response.status(500).send({
