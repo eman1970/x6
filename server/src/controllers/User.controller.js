@@ -1,3 +1,4 @@
+import { response } from 'express'
 import UserModel from '../models/User.model.js'
 
 const createUser = async (request, response) => {
@@ -36,7 +37,7 @@ const getAllUsers = async (request, response) => {
     }
 }
 
-const deleteUser = async (request, response) => {
+/* const deleteUser = async (request, response) => {
     const user = request.body.username
     try {
         const databaseResponse = await UserModel.deleteOne({ userName: user })
@@ -46,6 +47,19 @@ const deleteUser = async (request, response) => {
             message: error.message
         })
     }
+} */
+
+const deleteUser = async (request, response) => {
+try {
+    const userId = request.params.userId
+    const databaseResponse = await UserModel.findByIdAndDelete(userId)
+    response.status(200).send({ message: 'Successfully deleted user', data: databaseResponse})
+} catch (error){
+    response.status(500).send({
+        message: `Error while trying to delete user with ID ${userId}`,
+        error: error.message
+    })
+}
 }
 
 export default {
