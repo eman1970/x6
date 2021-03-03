@@ -36,7 +36,20 @@ const getAllUsers = async (request, response) => {
     }
 }
 
+const deleteUser = async (request, response) => {
+    const user = request.body.username
+    try {
+        const databaseResponse = await UserModel.deleteOne({ userName: user })
+        response.status(200).send(databaseResponse)
+    } catch (error) {
+        response.status(500).send({
+            message: error.message
+        })
+    }
+}
+
 export default {
     createUser,
-    getAllUsers
+    getAllUsers,
+    deleteUser
 }
