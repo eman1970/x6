@@ -4,7 +4,7 @@ import morgan from 'morgan'
 import Configurations from './configurations/Configurations.js'
 import Middlewares from './src/middlewares/Middlewares.js'
 import UserRoutes from './src/routes/User.route.js'
- 
+
 /* import mongoose from 'mongoose' */
 
 
@@ -13,25 +13,18 @@ app.use(express.json())
 app.use(helmet())
 app.use(morgan('common'))
 
-const checkIfAdmin = (request, response, next) => {
+/*const checkIfAdmin = (request, response, next) => {
     console.log(request.query.username)
     next()
 }
-
 app.use(checkIfAdmin)
-
-
-
 app.get('/recipe', (request, response) => {
     response.send('Ditt API-anrop gick igenom!')
-
 })
-
 app.get('/throwdice', checkIfAdmin, (request, response) => {
     response.send(Math.random().toString())
-
 })
-
+*/
 
 UserRoutes.routes(app)
 app.use(Middlewares.notFound)
