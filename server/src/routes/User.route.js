@@ -6,6 +6,7 @@ const routes = (app) => {
     /* app.delete('/del', UserController.deleteUser) */
     app.delete('/user/:userId', UserController.deleteUser)
     app.put('/user/:userId', UserController.updateUser)
+    app.get('/search', UserController.queryUsername)
 
 }
 

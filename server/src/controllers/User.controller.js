@@ -69,7 +69,7 @@ const updateUser = async (request, response) => {
         password: request.body.password
     }
     try {
-        const databaseResponse = await UserModel.findByIdAndUpdate(userId, data, {new: true})
+        const databaseResponse = await UserModel.findByIdAndUpdate(userId, data, { new: true })
         response.status(200).send(databaseResponse)
     } catch (error) {
         response.status(500).send({
@@ -82,9 +82,23 @@ const updateUser = async (request, response) => {
 
 }
 
+const queryUsername = async (request, response) => {
+    try {
+        const databaseResponse = await UserModel.find({ userName: request.query.username })
+        response.status(200).send(databaseResponse)
+    } catch (error) {
+        response.status(500).send({
+            message: `Error occured while trying to retrieve username: ${request.query.username} `,
+            error: error.message
+        })
+
+    }
+
+}
 export default {
     createUser,
     getAllUsers,
     deleteUser,
-    updateUser
+    updateUser,
+    queryUsername
 }
